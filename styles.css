@@ -10,12 +10,12 @@ body {
 .game-area {
     width: 700px;
     height: 500px;
-    background-color: white;
+    background-color:ivory;
     position: relative;
 }
 
 .ball {
-    background-color: green;
+    background-color: rgb(149, 88, 193);
     height: 20px;
     width: 20px;
     position: absolute;

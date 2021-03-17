@@ -1,3 +1,30 @@
+let positionX = 0;
+let positionY = 1;
+
+// get the ball DOM element
+const ball = document.querySelector('.ball');
+
+function update() {
+    positionX += velocity;
+    ball.style.left = `${positionX}px`;
+}
+
+let positionXTop = 1;
+let positionYRight = 2;
+
+const positionOfBall = document.querySelector('.ball');
+
+function update() {
+    positionYTop+= velocity;
+    positionOfBall.style.right = `${positionY}px`;
+}
+
+
+
+
+
+
+
 // Size of the game area (in px)
 const GAME_AREA_WIDTH = 700;
 const GAME_AREA_HEIGHT = 500;
