@@ -1,33 +1,41 @@
-let positionX = 0;
-let positionY = 1;
+//Game frame
+const GAME_AREA_WIDTH = 700;
+const GAME_AREA_HEIGHT = 500;
+
+
+let positionX = 100;
+let positionY = 100;
+let velocityX = 1; // controls direction
+let velocityY = 4; // pos/neg opposite directions
 
 // get the ball DOM element
 const ball = document.querySelector('.ball');
 
 function update() {
-    positionX += velocity;
-    ball.style.left = `${positionX}px`;
+    positionX += velocityX; // to increment
+    positionY += velocityY;
+
+    if(positionY >= GAME_AREA_HEIGHT - BALL_SIZE) { // bottom ball bounce
+        velocityY = -velocityY;
+    }
+
+    if(positionY <= 0) {
+        velocityY = -velocityY; //top ball bounce
+    }
+
+    ball.style.top = `${positionY}px`;
+    ball.style.left = `${positionX}px`; // remember this is template string syntax
 }
 
-let positionXTop = 1;
-let positionYRight = 2;
-
-const positionOfBall = document.querySelector('.ball');
-
-function update() {
-    positionYTop+= velocity;
-    positionOfBall.style.right = `${positionY}px`;
+function loop() {
+update();
+window.requestAnimationFrame(loop);
 }
+window.requestAnimationFrame(loop);
 
 
 
 
-
-
-
-// Size of the game area (in px)
-const GAME_AREA_WIDTH = 700;
-const GAME_AREA_HEIGHT = 500;
 
 // Size of the paddles (in px)
 const PADDLE_HEIGHT = 100;
@@ -35,30 +43,3 @@ const PADDLE_WIDTH = 20;
 
 // Size of the ball (in px)
 const BALL_SIZE = 20;
-
-// Get the computer paddle element
-const computerPaddle = document.querySelector('.computer-paddle');
-
-// Initial computer paddle y-position and y-velocity
-let computerPaddleYPosition = 0;
-let computerPaddleYVelocity = 1;
-
-// Update the pong world
-function update() {
-
-    // Update the computer paddle's position
-    computerPaddleYPosition = computerPaddleYPosition + computerPaddleYVelocity;
-
-    // If the computer paddle goes off the edge of the screen, bring it back
-    computerPaddleYPosition = computerPaddleYPosition % (GAME_AREA_HEIGHT - PADDLE_HEIGHT);
-
-    // Apply the y-position 
-    computerPaddle.style.top = `${computerPaddleYPosition}px`;
-}
-
-// Call the update() function everytime the browser is ready to re-render
-function loop() {
-    update();
-    window.requestAnimationFrame(loop);
-}
-window.requestAnimationFrame(loop);
